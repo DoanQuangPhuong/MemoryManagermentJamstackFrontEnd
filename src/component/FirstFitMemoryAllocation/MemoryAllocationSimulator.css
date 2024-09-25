@@ -1,0 +1,80 @@
+.custom-title {
+  font-size: 3rem; /* Kích thước chữ lớn để nổi bật */
+  font-weight: 700; /* Chữ đậm để nổi bật hơn */
+  color: #333; /* Màu chữ tối cho sự rõ ràng */
+  text-transform: uppercase; /* Viết hoa chữ để tạo sự nổi bật */
+  letter-spacing: 1px; /* Khoảng cách giữa các chữ để chữ dễ đọc hơn */
+  background: linear-gradient(135deg, #00aaff, #004e92); /* Gradient từ xanh sáng sang xanh đậm */
+  -webkit-background-clip: text; /* Cắt nền theo chữ cho trình duyệt Webkit */
+  -moz-background-clip: text; /* Cắt nền theo chữ cho trình duyệt Firefox */
+  background-clip: text; /* Cắt nền theo chữ cho chuẩn CSS */
+  -webkit-text-fill-color: transparent; /* Làm chữ trong suốt để thấy gradient */
+  padding: 10px; /* Khoảng cách nội bộ xung quanh tiêu đề */
+  border-radius: 8px; /* Bo góc mềm mại */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng mềm mại */
+  margin: 0 auto; /* Căn giữa */
+}
+
+.diagram-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.memory-block {
+  width: 120px;
+  height: 100px;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.block {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.block.allocated {
+  background-color: rgb(28, 128, 28);
+}
+
+.block.unallocated {
+  background-color: rgb(200, 30, 30);
+}
+
+.block-label {
+  font-weight: bold;
+}
+
+.block-size {
+  font-size: 14px;
+  color: gray;
+}
+
+
+.memory-block {
+  border: 1px solid #333;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.block {
+  padding: 10px;
+  margin: 5px 0;
+  font-weight: bold;
+  color: white;
+}
+
+
+.block-size {
+  font-size: 14px;
+  color: #555;
+}
