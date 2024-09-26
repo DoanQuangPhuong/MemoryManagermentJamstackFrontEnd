@@ -52,7 +52,6 @@ const MemoryAllocationSimulator = () => {
     return 'N/A'; // Default if no fragmentation data
   };
 
-  //Hello
   // Render memory block diagram
   const renderMemoryBlockDiagram = () => {
     return (
