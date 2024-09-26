@@ -67,7 +67,7 @@ const MemoryAllocationSimulator = () => {
                 <div className={`block ${processIndex !== -1 ? 'allocated' : 'unallocated'}`}>
                   {processIndex !== -1 ? `P${processIndex + 1}` : ''}
                 </div>
-                <div className="block-size">{results.remainingBlocks[index]}KB</div>
+                <div className="block-size">{results.remainingBlocks[index]}KB </div>
               </div>
             );
           })}
