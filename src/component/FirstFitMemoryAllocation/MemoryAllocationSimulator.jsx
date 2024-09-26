@@ -52,11 +52,12 @@ const MemoryAllocationSimulator = () => {
     return 'N/A'; // Default if no fragmentation data
   };
 
+  //Hello
   // Render memory block diagram
   const renderMemoryBlockDiagram = () => {
     return (
       <div className="memory-block-diagram mt-4">
-        <h4 className="text-center">Memory Block Allocation Diagram</h4>
+        <h4 className="text-center">Sơ Đồ Cấp Phát Bộ Nhớ</h4>
         <div className="diagram-container">
           {blockSizes.map((block, index) => {
             const processIndex = results.allocations.findIndex(allocation => allocation === index + 1);
@@ -66,7 +67,7 @@ const MemoryAllocationSimulator = () => {
                 <div className={`block ${processIndex !== -1 ? 'allocated' : 'unallocated'}`}>
                   {processIndex !== -1 ? `P${processIndex + 1}` : ''}
                 </div>
-                <div className="block-size">{block}KB</div>
+                <div className="block-size">{results.remainingBlocks[index]}KB</div>
               </div>
             );
           })}
