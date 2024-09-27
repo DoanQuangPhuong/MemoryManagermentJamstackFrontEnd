@@ -96,8 +96,8 @@ const MemoryAllocationSimulator = () => {
               <option value="first-fit">First-Fit</option>
               <option value="best-fit">Best-Fit</option>
               <option value="worst-fit">Worst-Fit</option>
-              <option value="next-fit">Next-fit</option>
-              <option value="last-fit">Last-fit</option>
+              <option value="next-fit">Next-Fit</option>
+              <option value="last-fit">Last-Fit</option>
             </select>
           </div>
         </div>
