@@ -15,6 +15,24 @@
   margin: 0 auto; /* Căn giữa */
 }
 
+h4.text-center {
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Make the text bold */
+  color: #2c87ee; /* Choose a visually pleasing color */
+  letter-spacing: 2px; /* Add spacing between letters */
+  text-transform: uppercase; /* Make text uppercase */
+  margin-bottom: 20px; /* Add space below the heading */
+  border-bottom: 2px solid #4a90e2; /* Optional: Add a bottom border */
+  display: inline-block; /* Border will fit the text */
+  padding-bottom: 5px; /* Adds padding inside the border */
+}
+
+.form-group label {
+  margin-bottom: 15px; /* Adjust the margin value as needed */
+  display: block; /* Ensure label is a block element */
+}
+
+
 .diagram-container {
   display: flex;
   flex-wrap: wrap;
@@ -42,11 +60,11 @@
 }
 
 .block.allocated {
-  background-color: rgb(28, 128, 28);
+  background-color:  rgb(200, 30, 30);
 }
 
 .block.unallocated {
-  background-color: rgb(200, 30, 30);
+  background-color: rgb(28, 128, 28);
 }
 
 .block-label {

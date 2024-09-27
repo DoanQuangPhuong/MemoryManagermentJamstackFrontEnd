@@ -59,10 +59,14 @@ const MemoryAllocationSimulator = () => {
         <h4 className="text-center">Sơ Đồ Cấp Phát Bộ Nhớ</h4>
         <div className="diagram-container">
           {blockSizes.map((block, index) => {
+            //tìm tất cả vị trí process đc cấp phát
             const processIndex = results.allocations.findIndex(allocation => allocation === index + 1);
+            console.log(results.allocations)
+            console.log(processIndex)
             return (
               <div key={index} className="memory-block">
                 <div className="block-label">M{index + 1}</div>
+                {/* dùng vòng lặp duyệt qua mảng */}
                 <div className={`block ${processIndex !== -1 ? 'allocated' : 'unallocated'}`}>
                   {processIndex !== -1 ? `P${processIndex + 1}` : ''}
                 </div>
@@ -82,7 +86,7 @@ const MemoryAllocationSimulator = () => {
       <div className="row justify-content-end">
         <div className="col-md-4">
           <div className="form-group mt-2 float-end">
-            <label htmlFor="allocationType">Chọn loại cấp phát bộ nhớ:</label>
+            <label htmlFor="allocationType">Chọn Loại Cấp Phát Bộ Nhớ</label>
             <select
               className="form-select"
               id="allocationType"
@@ -92,6 +96,8 @@ const MemoryAllocationSimulator = () => {
               <option value="first-fit">First-Fit</option>
               <option value="best-fit">Best-Fit</option>
               <option value="worst-fit">Worst-Fit</option>
+              <option value="next-fit">Next-fit</option>
+              <option value="last-fit">Last-fit</option>
             </select>
           </div>
         </div>
