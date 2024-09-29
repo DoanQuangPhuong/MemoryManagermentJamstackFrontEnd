@@ -60,7 +60,7 @@ const MemoryAllocationSimulator = () => {
         <div className="diagram-container">
           {blockSizes.map((block, index) => {
             //tìm tất cả vị trí process đc cấp phát
-            const processIndex = results.allocations.findIndex(allocation => allocation === index + 1);
+            const processIndex = results.allocations.findIndex(allocation => allocation === index);
             console.log(results.allocations)
             console.log(processIndex)
             return (
@@ -165,7 +165,7 @@ const MemoryAllocationSimulator = () => {
                 <td>{index + 1}</td>
                 <td>{process}KB</td>
                 <td style={{ color: results.allocations[index] === -1 ? 'red' : 'black'}}>
-                    {results.allocations[index] !== -1 ? results.allocations[index] : 'Không thể thực thi'}
+                    {results.allocations[index] !== -1 ? results.allocations[index] + 1 : 'Không thể thực thi'}
                 </td>
 
                 <td>{getFragmentationAfterProcess(index)}</td>
