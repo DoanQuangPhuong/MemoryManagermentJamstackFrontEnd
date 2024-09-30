@@ -61,8 +61,6 @@ const MemoryAllocationSimulator = () => {
           {blockSizes.map((block, index) => {
             //tìm tất cả vị trí process đc cấp phát
             const processIndex = results.allocations.findIndex(allocation => allocation === index);
-            console.log(results.allocations)
-            console.log(processIndex)
             return (
               <div key={index} className="memory-block">
                 <div className="block-label">M{index + 1}</div>
