@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MemoryAllocationSimulator from './component/FirstFitMemoryAllocation/MemoryAllocationSimulator.jsx';
+import MemoryAllocationSimulator from './component/MemoryAllocation/MemoryAllocationSimulator.jsx';
 
 function App() {
   
