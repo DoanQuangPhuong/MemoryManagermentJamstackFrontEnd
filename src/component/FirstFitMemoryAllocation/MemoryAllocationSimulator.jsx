@@ -52,26 +52,34 @@ const MemoryAllocationSimulator = () => {
     return 'N/A'; // Default if no fragmentation data
   };
 
+  
+
   // Render memory block diagram
   const renderMemoryBlockDiagram = () => {
     return (
       <div className="memory-block-diagram mt-4">
         <h4 className="text-center">Sơ Đồ Cấp Phát Bộ Nhớ</h4>
         <div className="diagram-container">
-          {blockSizes.map((block, index) => {
-            //tìm tất cả vị trí process đc cấp phát
-            const processIndex = results.allocations.findIndex(allocation => allocation === index);
+        {blockSizes.map((block, index) => {
+       // Tìm tất cả các tiến trình được cấp phát cho block này (index)
+            const allocatedProcesses = results.allocations
+              .map((allocation, processIndex) => allocation === index ? `P${processIndex + 1}` : null)
+              .filter(process => process !== null); // Lọc ra các tiến trình được cấp phát
+            
             return (
               <div key={index} className="memory-block">
-                <div className="block-label">M{index + 1}</div>
-                {/* dùng vòng lặp duyệt qua mảng */}
-                <div className={`block ${processIndex !== -1 ? 'allocated' : 'unallocated'}`}>
-                  {processIndex !== -1 ? `P${processIndex + 1}` : ''}
+                <div className="block-label">Bộ nhớ {index + 1}</div>
+                <div className={`block ${allocatedProcesses.length > 0 ? 'allocated' : 'unallocated'}`}>
+                  {/* Hiển thị tất cả các tiến trình đã được cấp phát cho block này */}
+                  {allocatedProcesses.length > 0 
+                    ? allocatedProcesses.join(', ') // Nối các tiến trình bằng dấu phẩy nếu có nhiều tiến trình
+                    : ''}
                 </div>
-                <div className="block-size">{results.remainingBlocks[index]}KB </div>
+                <div className="block-size">{results.remainingBlocks[index]}KB</div> {/* Kích thước còn lại */}
               </div>
             );
           })}
+
         </div>
       </div>
     );

@@ -48,6 +48,34 @@ h4.text-center {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Staggered delay for each block */
+.memory-block:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.memory-block:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.memory-block:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.memory-block:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.memory-block:nth-child(5) {
+  animation-delay: 1s;
+}
+
+.memory-block:nth-child(6) {
+  animation-delay: 1,2s;
 }
 
 .block {
@@ -60,7 +88,7 @@ h4.text-center {
 }
 
 .block.allocated {
-  background-color:  rgb(200, 30, 30);
+  background-color: rgb(200, 30, 30);
 }
 
 .block.unallocated {
@@ -76,14 +104,6 @@ h4.text-center {
   color: gray;
 }
 
-
-.memory-block {
-  border: 1px solid #333;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-}
-
 .block {
   padding: 10px;
   margin: 5px 0;
@@ -91,8 +111,19 @@ h4.text-center {
   color: white;
 }
 
-
 .block-size {
   font-size: 14px;
   color: #555;
+}
+
+/* Fade-in and slide-up animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
