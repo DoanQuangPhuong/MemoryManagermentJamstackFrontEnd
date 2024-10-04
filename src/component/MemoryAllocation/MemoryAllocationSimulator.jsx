@@ -87,10 +87,9 @@ const MemoryAllocationSimulator = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center mb-4 custom-title">Trình Mô Phỏng Bộ Nhớ Được Cấp Phát</h1>
-
-      <div className="row justify-content-end">
-        <div className="col-md-4">
+      <h1 className="text-center mb-4 custom-title">Tìm hiểu công nghệ Jamstack và xây dựng ứng dụng Web minh họa các giải thuật cấp phát bộ nhớ chính</h1>
+      <div className="row justify-content-start">
+        <div className="col-md-2">
           <div className="form-group mt-2 float-end">
             <label htmlFor="allocationType">Chọn Loại Cấp Phát Bộ Nhớ</label>
             <select
@@ -116,7 +115,7 @@ const MemoryAllocationSimulator = () => {
             <div key={index} className="input-group mb-2">
               <span className="input-group-text">Bộ nhớ {index + 1}</span>
               <input
-                type="number"
+                type="text"
                 className="form-control"
                 value={size || ''}
                 onChange={(e) => handleBlockSizeChange(index, e.target.value)}
@@ -134,7 +133,7 @@ const MemoryAllocationSimulator = () => {
             <div key={index} className="input-group mb-2">
               <span className="input-group-text">Tiến Trình {index + 1}</span>
               <input
-                type="number"
+                type="text"
                 className="form-control"
                 value={size || ''}
                 onChange={(e) => handleProcessSizeChange(index, e.target.value)}

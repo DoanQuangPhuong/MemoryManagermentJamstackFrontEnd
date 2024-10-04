@@ -1,5 +1,5 @@
 .custom-title {
-  font-size: 3rem; /* Kích thước chữ lớn để nổi bật */
+  font-size: 2.8rem; /* Kích thước chữ lớn để nổi bật */
   font-weight: 700; /* Chữ đậm để nổi bật hơn */
   color: #333; /* Màu chữ tối cho sự rõ ràng */
   text-transform: uppercase; /* Viết hoa chữ để tạo sự nổi bật */
@@ -15,6 +15,7 @@
   margin: 0 auto; /* Căn giữa */
 }
 
+
 h4.text-center {
   font-size: 24px; /* Increase font size */
   font-weight: bold; /* Make the text bold */
@@ -28,6 +29,7 @@ h4.text-center {
 }
 
 .form-group label {
+  font-size: 15px;
   margin-bottom: 15px; /* Adjust the margin value as needed */
   display: block; /* Ensure label is a block element */
 }
