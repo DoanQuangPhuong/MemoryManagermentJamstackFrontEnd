@@ -8,6 +8,15 @@ const MemoryAllocationSimulator = () => {
   const [results, setResults] = useState({ allocations: [], allFragmentations: [] });
   const [allocationType, setAllocationType] = useState('first-fit');
 
+  const allocationDefinitions = {
+    'first-fit': 'Chọn khối bộ nhớ đầu tiên đủ lớn để cấp phát cho tiến trình.',
+    'best-fit': 'Chọn khối bộ nhớ nhỏ nhất đủ lớn để cấp phát cho tiến trình, nhằm giảm thiểu phân mảnh.',
+    'worst-fit': 'Chọn khối bộ nhớ lớn nhất để cấp phát cho tiến trình, nhằm giữ lại nhiều không gian trống.',
+    'next-fit': 'Giống như First-Fit, nhưng bắt đầu tìm kiếm từ vị trí khối bộ nhớ cuối cùng được cấp phát.',
+    'last-fit': 'Chọn khối bộ nhớ cuối cùng đủ lớn để cấp phát cho tiến trình.',
+  };
+  
+
   // Handle block size input changes
   const handleBlockSizeChange = (index, value) => {
     const sizes = [...blockSizes];
@@ -89,8 +98,8 @@ const MemoryAllocationSimulator = () => {
     <div className="container mt-4">
       <h1 className="text-center mb-4 custom-title">Tìm hiểu công nghệ Jamstack và xây dựng ứng dụng Web minh họa các giải thuật cấp phát bộ nhớ chính</h1>
       <div className="row justify-content-start">
-        <div className="col-md-2">
-          <div className="form-group mt-2 float-end">
+        <div className="col-md-3">
+          <div className="form-group mt-2 text-start">
             <label htmlFor="allocationType">Chọn Loại Cấp Phát Bộ Nhớ</label>
             <select
               className="form-select"
@@ -106,9 +115,16 @@ const MemoryAllocationSimulator = () => {
             </select>
           </div>
         </div>
+
+        <div className="col-md-9">
+          <div className="mt-2 p-3 bg-white bg-white  text-start text-muted">
+            <strong>Định nghĩa:</strong> {allocationDefinitions[allocationType]}
+          </div>
       </div>
 
-      <div className="row mt-4">
+      </div>
+
+      <div className="row mt-5">
         <div className="col-md-6">
           <h4 className="text-center">Bộ Nhớ</h4>
           {blockSizes.map((size, index) => (
