@@ -49,15 +49,17 @@
 .btnAddMemory{
   font-weight: bold;
 }
-
+label{
+  font-weight: bold;
+}
 h4.text-center {
   font-size: 24px; /* Increase font size */
   font-weight: bold; /* Make the text bold */
-  color: #2c87ee; /* Choose a visually pleasing color */
+  color: rgb(13, 110, 253); /* Choose a visually pleasing color */
   letter-spacing: 2px; /* Add spacing between letters */
   text-transform: uppercase; /* Make text uppercase */
   margin-bottom: 20px; /* Add space below the heading */
-  border-bottom: 2px solid #4a90e2; /* Optional: Add a bottom border */
+  border-bottom: 2px solid rgb(13, 110, 253); /* Optional: Add a bottom border */
   display: inline-block; /* Border will fit the text */
   padding-bottom: 5px; /* Adds padding inside the border */
 }
