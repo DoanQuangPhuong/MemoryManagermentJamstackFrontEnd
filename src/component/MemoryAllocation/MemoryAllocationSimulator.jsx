@@ -68,6 +68,13 @@ const MemoryAllocationSimulator = () => {
     return (
       <div className="memory-block-diagram mt-4">
         <h4 className="text-center">Sơ Đồ Cấp Phát Bộ Nhớ</h4>
+        <div className="allocation-legend mt-4 text-start">
+              <h6>Màu sắc thể hiện</h6>
+              <ul className="legend-list">
+                <li><span className="legend-color unallocated"></span> Chưa cấp phát</li>
+                <li><span className="legend-color allocated"></span> Đã cấp phát</li>
+              </ul>
+          </div>
         <div className="diagram-container">
         {blockSizes.map((block, index) => {
        // Tìm tất cả các tiến trình được cấp phát cho block này (index)
@@ -88,7 +95,6 @@ const MemoryAllocationSimulator = () => {
               </div>
             );
           })}
-
         </div>
       </div>
     );
@@ -138,7 +144,7 @@ const MemoryAllocationSimulator = () => {
               />
             </div>
           ))}
-          <button className="btn btn-primary w-100" onClick={() => setBlockSizes([...blockSizes, 0])}>
+          <button className="btn btn-primary w-100 btnAddMemory" onClick={() => setBlockSizes([...blockSizes, 0])}>
             Thêm Khối Nhớ
           </button>
         </div>
@@ -156,14 +162,14 @@ const MemoryAllocationSimulator = () => {
               />
             </div>
           ))}
-          <button className="btn btn-primary w-100" onClick={() => setProcessSizes([...processSizes, 0])}>
+          <button className="btn btn-primary w-100 btnAddProcess" onClick={() => setProcessSizes([...processSizes, 0])}>
             Thêm Tiến Trình
           </button>
         </div>
       </div>
 
-      <div className="text-center mt-4">
-        <button className="btn btn-success" onClick={allocateMemory}>
+      <div className="text-center mt-4 btnCapPhat">
+        <button className="btnAllocation" onClick={allocateMemory}>
           Cấp Phát Bộ Nhớ
         </button>
       </div>
@@ -172,7 +178,7 @@ const MemoryAllocationSimulator = () => {
         <div className="mt-4" style={{ marginBottom: '80px'}}>
           <h4 className="text-center">Kết Quả Cấp Phát</h4>
           <table className="table table-bordered table-hover mt-3">
-            <thead className="table-dark">
+            <thead className="table_header">
               <tr>
                 <th>Tiến Trình</th>
                 <th>Kích Thước Tiến Trình</th>
