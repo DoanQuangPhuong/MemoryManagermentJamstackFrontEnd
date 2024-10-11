@@ -203,3 +203,14 @@ h4.text-center {
 .legend-color.allocated {
   background-color: rgb(200, 30, 30); /* Màu đỏ cho đã cấp phát */
 }
+
+/* MemoryAllocationSimulator.css */
+
+.allocated-frag {
+  color: red;
+  font-weight: 600;
+}
+
+.unallocated-frag {
+  
+}

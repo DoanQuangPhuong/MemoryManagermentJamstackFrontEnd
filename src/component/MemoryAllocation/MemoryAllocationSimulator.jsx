@@ -9,12 +9,41 @@ const MemoryAllocationSimulator = () => {
   const [allocationType, setAllocationType] = useState('first-fit');
 
   const allocationDefinitions = {
-    'first-fit': 'Chọn khối bộ nhớ đầu tiên đủ lớn để cấp phát cho tiến trình.',
-    'best-fit': 'Chọn khối bộ nhớ nhỏ nhất đủ lớn để cấp phát cho tiến trình, nhằm giảm thiểu phân mảnh.',
-    'worst-fit': 'Chọn khối bộ nhớ lớn nhất để cấp phát cho tiến trình, nhằm giữ lại nhiều không gian trống.',
-    'next-fit': 'Giống như First-Fit, nhưng bắt đầu tìm kiếm từ vị trí khối bộ nhớ cuối cùng được cấp phát.',
-    'last-fit': 'Chọn khối bộ nhớ cuối cùng đủ lớn để cấp phát cho tiến trình.',
+    'first-fit': 'First-fit là giải thuật tìm kiếm vùng nhớ trống đầu tiên đủ lớn để chứa tiến trình cần nạp. Hệ điều hành sẽ bắt đầu tìm kiếm từ đầu vùng nhớ, và khi gặp vùng nhớ trống đầu tiên đủ để chứa tiến trình, nó sẽ cấp phát ngay mà không tiếp tục tìm kiếm các vùng trống khác.',
+    'best-fit': 'Best-fit là giải thuật duyệt toàn bộ danh sách các khối bộ nhớ trống và chọn khối có kích thước nhỏ nhất nhưng vẫn đủ lớn để chứa tiến trình.',
+    'worst-fit': 'Worst-fit duyệt toàn bộ danh sách các khối bộ nhớ trống và chọn khối có kích thước lớn nhất đủ để chứa tiến trình.',
+    'next-fit': 'Next-fit là biến thể của First-fit. Nó bắt đầu tìm kiếm từ vị trí khối bộ nhớ cuối cùng đã được cấp phát (hoặc từ đầu nếu chưa có khối nào được cấp phát). Thuật toán duyệt tuần tự các khối tiếp theo và chọn khối đầu tiên đủ lớn. Vị trí khối này được ghi nhớ để lần cấp phát sau bắt đầu từ đây.',
+    'last-fit': ' Last-fit cũng duyệt toàn bộ danh sách các khối bộ nhớ trống, tương tự như Best-fit và Worst-fit. Tuy nhiên, nó chọn khối bộ nhớ trống cuối cùng có kích thước đủ lớn để chứa tiến trình.',
   };
+
+  const allocationSteps = {
+    "first-fit": [
+      "Bước 1: Duyệt từng khối bộ nhớ từ đầu.",
+      "Bước 2: Tìm khối đầu tiên có kích thước đủ lớn để chứa tiến trình.",
+      "Bước 3: Cấp phát bộ nhớ cho tiến trình và cập nhật kích thước còn lại của khối.",
+    ],
+    "best-fit": [
+      "Bước 1: Duyệt tất cả các khối bộ nhớ trống.",
+      "Bước 2: Tìm khối có kích thước nhỏ nhất nhưng vẫn đủ lớn để chứa tiến trình.",
+      "Bước 3: Cấp phát bộ nhớ cho tiến trình và cập nhật kích thước còn lại của khối.",
+    ],
+    "worst-fit": [
+      "Bước 1: Duyệt tất cả các khối bộ nhớ trống.",
+      "Bước 2: Tìm khối có kích thước lớn nhất đủ để chứa tiến trình.",
+      "Bước 3: Cấp phát bộ nhớ cho tiến trình và cập nhật kích thước còn lại của khối.",
+    ],
+    "next-fit": [
+      "Bước 1: Bắt đầu từ khối bộ nhớ cuối cùng đã được cấp phát (hoặc từ đầu nếu chưa có khối nào được cấp phát).",
+      "Bước 2: Duyệt tuần tự các khối bộ nhớ tiếp theo.",
+      "Bước 3: Cấp phát bộ nhớ cho tiến trình khi tìm thấy khối đủ lớn. Ghi nhớ vị trí khối này để lần cấp phát sau bắt đầu từ đây.",
+    ],
+    "last-fit": [
+      "Bước 1: Duyệt tất cả các khối bộ nhớ.",
+      "Bước 2: Ghi nhớ vị trí khối bộ nhớ cuối cùng đã được cấp phát.",
+      "Bước 3: Cấp phát bộ nhớ khi tìm thấy khối đủ lớn từ vị trí ghi nhớ.",
+    ],
+  };
+  
   
 
   // Handle block size input changes
@@ -33,7 +62,6 @@ const MemoryAllocationSimulator = () => {
 
   // Call the backend API to allocate memory
   const allocateMemory = async () => {
-    //http://localhost:5000/allocate
     try {
       const response = await fetch('http://localhost:5000/allocate', {
         method: 'POST',
@@ -57,10 +85,21 @@ const MemoryAllocationSimulator = () => {
   // Display fragmentation after each process allocation
   const getFragmentationAfterProcess = (index) => {
     if (results.fragmentations && results.fragmentations.length > index) {
-      return results.fragmentations[index].map((frag) => `${frag}KB`).join(', ');
+      const fragmentations = results.fragmentations[index];
+      const allocatedSize = processSizes[index]; // Kích thước tiến trình đã được cấp phát
+  
+      return fragmentations.map((frag) => {
+        // Nếu vùng nhớ hiện tại khớp với kích thước tiến trình được cấp phát, tô màu cho nó
+        if (frag === allocatedSize) {
+          return `<span class="allocated-frag">${frag}KB</span>`;
+        } else {
+          return `<span class="unallocated-frag">${frag}KB</span>`;
+        }
+      }).join(', ');
     }
-    return 'N/A'; // Default if no fragmentation data
+    return 'N/A';
   };
+  
 
   
 
@@ -123,11 +162,20 @@ const MemoryAllocationSimulator = () => {
           </div>
         </div>
 
-        <div className="col-md-9">
-          <div className="mt-2 p-3 bg-white bg-white  text-start text-muted">
-            <strong>Định nghĩa:</strong> {allocationDefinitions[allocationType]}
-          </div>
-      </div>
+        <div className="col-md-9 p-2">
+            <div className="bg-white mt-4 ms-5 text-start">
+              <strong>Định nghĩa:</strong> {allocationDefinitions[allocationType]}
+            </div>
+            <div className="text-start ms-5">
+              <strong>Các bước thực hiện:</strong>
+              <ol>
+                {allocationSteps[allocationType].map((step, index) => (
+                  <li key={index} className='mt-2 ms-4'>{step}</li>
+                ))}
+              </ol>
+            </div>
+        </div>
+
 
       </div>
 
