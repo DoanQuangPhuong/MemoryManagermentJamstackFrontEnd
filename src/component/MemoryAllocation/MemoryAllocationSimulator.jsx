@@ -33,8 +33,9 @@ const MemoryAllocationSimulator = () => {
 
   // Call the backend API to allocate memory
   const allocateMemory = async () => {
+    //http://localhost:5000/allocate
     try {
-      const response = await fetch('http://localhost:5000/allocate', {
+      const response = await fetch('https://memory-managerment-jamstack-back-end.vercel.app/allocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
