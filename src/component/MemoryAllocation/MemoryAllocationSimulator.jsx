@@ -33,26 +33,26 @@ const MemoryAllocationSimulator = () => {
 
   // Call the backend API to allocate memory
   const allocateMemory = async () => {
-    //http://localhost:5000/allocate
     try {
-      const response = await fetch('https://memory-managerment-jamstack-back-end.vercel.app/allocate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ blockSizes, processSizes, allocationType }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const response = await fetch('https://memory-managerment-jamstack-back-end.vercel.app/allocate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ blockSizes, processSizes, allocationType }),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+    
+        const data = await response.json();
+        setResults(data); // Xử lý kết quả nhận về
+      } catch (error) {
+        console.error('Error fetching allocation data:', error);
       }
-
-      const data = await response.json();
-      setResults(data); // Set allocations and fragmentation after fetching
-    } catch (error) {
-      console.error('Error fetching allocation data:', error);
-    }
   };
+  
 
   // Display fragmentation after each process allocation
   const getFragmentationAfterProcess = (index) => {
