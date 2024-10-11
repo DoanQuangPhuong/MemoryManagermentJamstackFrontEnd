@@ -85,20 +85,10 @@ const MemoryAllocationSimulator = () => {
   // Display fragmentation after each process allocation
   const getFragmentationAfterProcess = (index) => {
     if (results.fragmentations && results.fragmentations.length > index) {
-      const fragmentations = results.fragmentations[index];
-      const allocatedSize = processSizes[index]; // Kích thước tiến trình đã được cấp phát
-  
-      return fragmentations.map((frag) => {
-        // Nếu vùng nhớ hiện tại khớp với kích thước tiến trình được cấp phát, tô màu cho nó
-        if (frag === allocatedSize) {
-          return `<span class="allocated-frag">${frag}KB</span>`;
-        } else {
-          return `<span class="unallocated-frag">${frag}KB</span>`;
-        }
-      }).join(', ');
+      return results.fragmentations[index].map((frag) => `${frag}KB`).join(', ');
     }
-    return 'N/A';
-  };
+    return 'N/A'; // Default if no fragmentation data
+  }; 
   
 
   
