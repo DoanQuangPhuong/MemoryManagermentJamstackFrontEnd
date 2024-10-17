@@ -63,7 +63,7 @@ const MemoryAllocationSimulator = () => {
   // Call the backend API to allocate memory
   const allocateMemory = async () => {
     try {
-      const response = await fetch('/allocate', {
+      const response = await fetch('ht/allocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
