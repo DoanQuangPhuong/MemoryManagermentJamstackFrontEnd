@@ -65,7 +65,6 @@ const MemoryAllocationSimulator = () => {
     try {
       const response = await fetch('https://memory-managerment-jamstack-back-end.vercel.app/allocate', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
