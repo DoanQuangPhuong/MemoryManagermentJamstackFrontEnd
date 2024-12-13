@@ -5,7 +5,7 @@ import './MemoryAllocationSimulator.css';
 const MemoryAllocationSimulator = () => {
   const [blockSizes, setBlockSizes] = useState([]);
   const [processSizes, setProcessSizes] = useState([]);
-  const [results, setResults] = useState({ allocations: [], allFragmentations: [] });
+  const [results, setResults] = useState({ allocations: [], allFragmentations: [] ,remainingBlocks : []});
   const [allocationType, setAllocationType] = useState('first-fit');
 
   const allocationDefinitions = {
@@ -33,7 +33,7 @@ const MemoryAllocationSimulator = () => {
       "Bước 3: Cấp phát bộ nhớ cho tiến trình và cập nhật kích thước còn lại của khối.",
     ],
     "next-fit": [
-      "Bước 1: Bắt đầu từ khối bộ nhớ cuối cùng đã được cấp phát (hoặc từ đầu nếu chưa có khối nào được cấp phát).",
+      "Bước 1: Bắt đầu từ khối bộ nhớ cuối cùng đã được cấp phát (hoặc từ đầu nếu chưa có khối nào được cấp phát.",
       "Bước 2: Duyệt tuần tự các khối bộ nhớ tiếp theo.",
       "Bước 3: Cấp phát bộ nhớ cho tiến trình khi tìm thấy khối đủ lớn. Ghi nhớ vị trí khối này để lần cấp phát sau bắt đầu từ đây.",
     ],
@@ -46,21 +46,21 @@ const MemoryAllocationSimulator = () => {
   
   
 
-  // Handle block size input changes
+  // Xử lý các thay đổi đầu vào kích thước khối(spread)
   const handleBlockSizeChange = (index, value) => {
     const sizes = [...blockSizes];
     sizes[index] = parseInt(value, 10);
     setBlockSizes(sizes);
   };
 
-  // Handle process size input changes
+  // Xử lý các thay đổi đầu vào kích thước tiến trình
   const handleProcessSizeChange = (index, value) => {
     const sizes = [...processSizes];
     sizes[index] = parseInt(value, 10);
     setProcessSizes(sizes);
   };
 
-  // Call the backend API to allocate memory
+  // Gọi API Backend để cấp phát bộ nhớ
   const allocateMemory = async () => {
     try {
       const response = await fetch('https://memory-managerment-jamstack-back-end.vercel.app/allocate', {
@@ -82,18 +82,18 @@ const MemoryAllocationSimulator = () => {
     }
   };
 
-  // Display fragmentation after each process allocation
+  //Hiển thị việc cấp phát sau mỗi lần cấp phát tiến trình
   const getFragmentationAfterProcess = (index) => {
     if (results.fragmentations && results.fragmentations.length > index) {
       return results.fragmentations[index].map((frag) => `${frag}KB`).join(', ');
     }
-    return 'N/A'; // Default if no fragmentation data
+    return 'N/A'; 
   }; 
   
 
   
 
-  // Render memory block diagram
+  // Hiển thị block
   const renderMemoryBlockDiagram = () => {
     return (
       <div className="memory-block-diagram mt-4">
@@ -205,6 +205,7 @@ const MemoryAllocationSimulator = () => {
             Thêm Tiến Trình
           </button>
         </div>
+        
       </div>
 
       <div className="text-center mt-4 btnCapPhat">
@@ -240,7 +241,7 @@ const MemoryAllocationSimulator = () => {
             </tbody>
           </table>
 
-          {/* Memory Block Diagram */}
+          {/* Hiển thị khôi block */}
           {renderMemoryBlockDiagram()}
         </div>
       )}
